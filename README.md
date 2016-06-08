@@ -144,6 +144,12 @@ export function routes($stateProvider: IStateProvider) {
 }
 ```
 
+require is a commonjs syntax, it basically takes everything inside the required file and puts it where you require it. We need to add a definition for it because its not a typescript syntax. Create typings.d.ts inside src:
+
+```sh
+declare function require(string: string): string;
+```
+
 Lets add the home controller, create home.controller.ts:
 
 ```sh
