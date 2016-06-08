@@ -181,7 +181,7 @@ Lets set up webpack now to bundle all this code into JS. Create a webpack direct
 
 ```sh
  npm i -D browser-sync browser-sync-webpack-plugin css-loader ts-loader raw-loader style-loader html-webpack-plugin
-````
+```
 
 loaders.js
 
@@ -201,7 +201,7 @@ module.exports = [
         loader: 'raw'
     }
 ];
-````
+```
 
 webpack.dev.js
 
