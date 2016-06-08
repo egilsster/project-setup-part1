@@ -29,5 +29,23 @@ node_modules/
 typings/
 ```
 
-Now we need to set up the folder structure for angular.
+Now we need to set up the folder structure for angular. Lets create a src folder for our TypeScript code, lets add index.ts inside that. Lets also create a home module, create a folder called home and create index.ts inside that.
 
+
+To start coding TypeScript, lets add tsconfig.json so we can import all the typings and what not. Create tsconfig.json in the root and put this in:
+
+```sh
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "outFile": "dist/build.js",
+        "sourceMap": true
+    },
+    "exclude": [
+        "node_modules",
+        "typings"
+    ]
+}
+```
