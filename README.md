@@ -246,7 +246,7 @@ module.exports = {
         loaders: loaders
     }
 };
-````
+```
 
 That should be it, lets add a script to run webpack with our config:
 
