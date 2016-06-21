@@ -1,5 +1,13 @@
 ## Setting up an AngularJS project with webpack
 
+# Requirements
+
+Download and install Node.js from https://nodejs.org/en/download/
+
+Now we use npm to install the following packages globally.
+```sh
+npm install -g webpack typescript typings
+```
 
 # Steps
 
@@ -144,7 +152,7 @@ export function routes($stateProvider: IStateProvider) {
 }
 ```
 
-require is a commonjs syntax, it basically takes everything inside the required file and puts it where you require it. We need to add a definition for it because its not a typescript syntax. Create typings.d.ts inside src:
+require is a common js syntax, it basically takes everything inside the required file and puts it where you require it. We need to add a definition for it because its not a typescript syntax. Create typings.d.ts inside src:
 
 ```sh
 declare function require(string: string): string;
@@ -254,7 +262,7 @@ module.exports = {
 };
 ```
 
-That should be it, lets add a script to run webpack with our config:
+That should be it, lets add a script property to package.json so webpack runs with our config:
 
 ```sh
 "start": "webpack --config webpack/webpack.dev.js --watch"
@@ -265,6 +273,12 @@ Lets run npm start. Oh boy, it complains JQuery isnt found, angular uses jquery 
 ```sh
 npm i -S jquery
 typings i -SG jquery
+```
+
+And additionally to compile the project we need to add the typescript package locally
+
+```sh
+npm install typescript
 ```
 
 Now lets run npm start. This should run without warnings and fire up a browser. But I dont see anything and no errors are in the console. That is because we havent added the home module to our main module. Lets do that:
