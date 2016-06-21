@@ -275,6 +275,12 @@ npm i -S jquery
 typings i -SG jquery
 ```
 
+And additionally to compile the project we need to add the typescript package locally
+
+```sh
+npm install typescript
+```
+
 Now lets run npm start. This should run without warnings and fire up a browser. But I dont see anything and no errors are in the console. That is because we havent added the home module to our main module. Lets do that:
 
 We are exporting the name of the module in index, so we can import the module into index.ts in the root of src and the variable we import has a string which is the name of the module. Our index.ts should look like this now:
