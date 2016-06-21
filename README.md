@@ -1,5 +1,15 @@
 ## Setting up an AngularJS project with webpack
 
+# Requirements
+
+Download and install Node.js
+https://nodejs.org/en/download/
+
+```sh
+npm install webpack -g
+npm install -g typescript
+npm install typings --global
+```
 
 # Steps
 
