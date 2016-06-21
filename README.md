@@ -6,9 +6,7 @@ Download and install Node.js from https://nodejs.org/en/download/
 
 Now we use npm to install the following packages globally.
 ```sh
-npm install webpack -g
-npm install -g typescript
-npm install typings --global
+npm install -g webpack typescript typings
 ```
 
 # Steps
@@ -154,7 +152,7 @@ export function routes($stateProvider: IStateProvider) {
 }
 ```
 
-require is a commonjs syntax, it basically takes everything inside the required file and puts it where you require it. We need to add a definition for it because its not a typescript syntax. Create typings.d.ts inside src:
+require is a common js syntax, it basically takes everything inside the required file and puts it where you require it. We need to add a definition for it because its not a typescript syntax. Create typings.d.ts inside src:
 
 ```sh
 declare function require(string: string): string;
