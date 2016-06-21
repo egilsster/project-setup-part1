@@ -2,7 +2,7 @@
 
 # Requirements
 
-Download and install Node.js
+Download and install Node.js from
 https://nodejs.org/en/download/
 
 ```sh
