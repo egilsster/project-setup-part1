@@ -4,6 +4,7 @@
 
 Download and install Node.js from https://nodejs.org/en/download/
 
+Now we use npm to install the following packages globally.
 ```sh
 npm install webpack -g
 npm install -g typescript
