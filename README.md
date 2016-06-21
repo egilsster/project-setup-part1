@@ -262,7 +262,7 @@ module.exports = {
 };
 ```
 
-That should be it, lets add a script to run webpack with our config:
+That should be it, lets add a script property to package.json so webpack runs with our config:
 
 ```sh
 "start": "webpack --config webpack/webpack.dev.js --watch"
