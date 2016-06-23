@@ -272,7 +272,7 @@ Lets run npm start. Oh boy, it complains JQuery isnt found, angular uses jquery 
 
 ```sh
 npm i -S jquery
-typings i -SG jquery
+typings i -SG dt~jquery
 ```
 
 And additionally to compile the project we need to add the typescript package locally
