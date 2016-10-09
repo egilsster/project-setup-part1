@@ -5,42 +5,42 @@
 Download and install Node.js from https://nodejs.org/en/download/
 
 Now we use npm to install the following packages globally.
+
 ```sh
-npm install -g webpack typescript typings
+npm install -g webpack typescript
 ```
 
 # Steps
 
-Setting up the project with npm and typings
+Setting up the project with npm
 
 ```sh
-npm init
-typings init
+npm init -y
 ```
 
-Press enter on everything, then you have a package.json file and typings.json
+This creates a package.json file with all the defaults.
 
 Lets start by installing angular, angular-ui-router, typescript and webpack:
 
 ```sh
 npm install angular angular-ui-router -S
-npm install webpack typings -D
-typings install dt~angular dt~angular-ui-router -SG
+npm install webpack -D
+npm install @types/angular @types/angular-ui-router -D
 ```
 
-I install angular and ui-router as dependencies since the project needs it to run. I install webpack and typescript as dev dependency because we only use webpack to develop.
+I install angular and ui-router as dependencies since the project needs it to run. I install webpack and typescript as dev dependency because we only use webpack to develop, same with the types.
 
-Now there are a lot of files that git wants to add to the repo, most of them from node modules, which we never want to have inside our repo, lets create a gitignore to fix that. Add these two lines to your .gitignore file
+Now there are a lot of files that git wants to add to the repo, most of them from node modules, which we never want to have inside our repo, lets create a gitignore to fix that. Add this to your .gitignore file
 
 ```sh
 node_modules/
-typings/
+dist/
 ```
 
 Now we need to set up the folder structure for angular. Lets create a src folder for our TypeScript code, lets add index.ts and index.html inside that. Lets also create a home module, create a folder called home and create index.ts inside that.
 
 
-To start coding TypeScript, lets add tsconfig.json so we can import all the typings and what not. Create tsconfig.json in the root and put this in:
+To start coding TypeScript, lets add tsconfig.json to configure how the TypeScript compiler handles our code. Create tsconfig.json in the root and put this in:
 
 ```sh
 {
@@ -51,6 +51,8 @@ To start coding TypeScript, lets add tsconfig.json so we can import all the typi
     "sourceMap": true,
     "module": "commonjs",
     "experimentalDecorators": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
     "outDir": "out"
   },
   "exclude": [
@@ -63,9 +65,7 @@ To start coding TypeScript, lets add tsconfig.json so we can import all the typi
 
 Now add this code to index.ts in src/
 
-```sh
-'use strict';
-
+```typescript
 import * as angular from 'angular';
 import 'angular-ui-router';
 
@@ -84,7 +84,7 @@ angular.bootstrap(document, ['app'], {
 
 Add this to index.html
 
-```sh
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -105,10 +105,8 @@ Add this to index.html
 
 Create index.config.ts in src folder and add this code:
 
-```sh
-'use strict';
-
-import { IStateService, IUrlRouterProvider } from 'angular-ui-router';
+```typescript
+import { IUrlRouterProvider } from 'angular-ui-router';
 
 routing.$inject = ['$urlRouterProvider'];
 
@@ -119,9 +117,7 @@ export function routing($urlRouterProvider: IUrlRouterProvider) {
 
 Now lets create a simple module, the home module. Add this to index.ts:
 
-```sh
-'use strict';
-
+```typescript
 import * as angular from 'angular';
 
 import { routes } from './home.routes';
@@ -135,9 +131,7 @@ export const homeModule = angular.module('home', [])
 
 Lets create the routing for this module, put this in home.routes.ts:
 
-```sh
-'use strict';
-
+```typescript
 import { IStateProvider } from 'angular-ui-router';
 
 routes.$inject = ['$stateProvider'];
@@ -154,34 +148,21 @@ export function routes($stateProvider: IStateProvider) {
 
 require is a common js syntax, it basically takes everything inside the required file and puts it where you require it. We need to add a definition for it because its not a typescript syntax. Create typings.d.ts inside src:
 
-```sh
-declare function require(string: string): string;
+```typescript
+declare function require(string: string): any;
 ```
 
 Lets add the home controller, create home.controller.ts:
 
-```sh
-'use strict';
-
-import { IScope } from 'angular';
-
-const deps: string[] = [
-    '$scope'
-];
-
+```typescript
 export class HomeCtrl {
-    constructor(
-        private $scope: IScope
-    ) {
-    }
+    constructor() { }
 }
-
-HomeCtrl.$inject = deps;
 ```
 
 Lets create the html for this module, which I am requiring as the template, create home.html with this:
 
-```sh
+```html
 <p>Hello from Home module</p>
 ```
 
@@ -193,7 +174,7 @@ Lets set up webpack now to bundle all this code into JS. Create a webpack direct
 
 loaders.js
 
-```sh
+```javascript
 module.exports = [
     {
         test: /\.ts(x?)$/,
@@ -213,7 +194,7 @@ module.exports = [
 
 webpack.dev.js
 
-```sh
+```javascript
 var loaders = require('./loaders');
 var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -264,7 +245,7 @@ module.exports = {
 
 That should be it, lets add a script property to package.json so webpack runs with our config:
 
-```sh
+```json
 "start": "webpack --config webpack/webpack.dev.js --watch"
 ```
 
@@ -272,22 +253,20 @@ Lets run npm start. Oh boy, it complains JQuery isnt found, angular uses jquery 
 
 ```sh
 npm i -S jquery
-typings i -SG dt~jquery
+npm i -D @types/jquery
 ```
 
 And additionally to compile the project we need to add the typescript package locally
 
 ```sh
-npm install typescript
+npm install -D typescript
 ```
 
 Now lets run npm start. This should run without warnings and fire up a browser. But I dont see anything and no errors are in the console. That is because we havent added the home module to our main module. Lets do that:
 
 We are exporting the name of the module in index, so we can import the module into index.ts in the root of src and the variable we import has a string which is the name of the module. Our index.ts should look like this now:
 
-```sh
-'use strict';
-
+```typescript
 import * as angular from 'angular';
 import 'angular-ui-router';
 

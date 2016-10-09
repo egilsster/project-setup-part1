@@ -6,6 +6,8 @@
     "sourceMap": true,
     "module": "commonjs",
     "experimentalDecorators": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
     "outDir": "out"
   },
   "exclude": [
