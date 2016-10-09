@@ -1,6 +1,4 @@
-'use strict';
-
-import { IStateService, IUrlRouterProvider } from 'angular-ui-router';
+import { IUrlRouterProvider } from 'angular-ui-router';
 
 routing.$inject = ['$urlRouterProvider'];
 

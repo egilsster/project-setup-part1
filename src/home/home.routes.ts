@@ -1,5 +1,3 @@
-'use strict';
-
 import { IStateProvider } from 'angular-ui-router';
 
 routes.$inject = ['$stateProvider'];
